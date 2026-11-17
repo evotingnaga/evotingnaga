@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kebijakan Privasi - NaGa.Tix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #F2FAFE;
+    --bg-soft: #E4F5FC;
+    --primary-dark: #2D7DB3;
+    --primary-deep: #4FA8DC;
+    --primary-mid: #89CFF0;
+    --primary-light: #C9ECFB;
+    --gold: #89CFF0;
+    --gold-light: #EDF9FF;
+    --silver: #D8EFFB;
+    --bronze: #D8B589;
+    --text-dark: #17415F;
+    --text-muted: #5C89A3;
+    --border-color: #D2EBFA;
+    --white: #FFFFFF;
+    --shadow-soft: 0 10px 28px rgba(45, 125, 179, 0.16);
+    --shadow-card: 0 16px 34px rgba(45, 125, 179, 0.14);
+    --shadow-glow: 0 0 0 1px rgba(255,255,255,0.5) inset, 0 18px 40px rgba(45, 125, 179, 0.28);
+  }
+  
+  * { box-sizing: border-box; font-family: 'Work Sans', sans-serif; margin: 0; padding: 0; }
+  body { background-color: var(--bg-main); color: var(--text-dark); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, .font-serif { font-family: 'Poppins', sans-serif; }
+  
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+  
+  /* Navbar */
+  nav { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-deep) 55%, var(--primary-mid) 100%); color: var(--white); padding: 16px 0; border-bottom: 2px solid rgba(255,255,255,0.28); position: sticky; top: 0; z-index: 50; box-shadow: 0 10px 24px rgba(45, 125, 179, 0.28); overflow: hidden; }
+  nav::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 15% -20%, rgba(255,255,255,0.35), transparent 55%); pointer-events: none; }
+  .nav-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+  .nav-brand { display: flex; align-items: center; gap: 10px; }
+  .nav-brand svg { width: 28px; height: 28px; fill: var(--gold); }
+  .nav-brand div { font-family: 'Poppins', sans-serif; font-size: clamp(14px, 2vw, 16px); line-height: 1.2; font-weight: 600; letter-spacing: 1px; color: var(--gold-light); text-transform: uppercase;}
+  .nav-brand span { display: block; font-size: 10px; font-family: 'Work Sans', sans-serif; letter-spacing: 2px; }
+  .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; }
+  .nav-links a { color: rgba(255,255,255,0.9); text-decoration: none; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: 0.2s; }
+  .nav-links a.active, .nav-links a:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+  /* Hero Section */
+  .hero { 
+    position: relative; 
+    background-color: var(--primary-dark);
+    background-image: linear-gradient(115deg, rgba(45,125,179,0.95) 0%, rgba(79,168,220,0.88) 40%, rgba(137,207,240,0.7) 75%, rgba(201,236,251,0.35) 100%); 
+    background-size: cover; 
+    background-position: center; 
+    color: var(--white); 
+    padding: clamp(50px, 8vw, 80px) 0; 
+    border-bottom: 6px solid rgba(255,255,255,0.3);
+    box-shadow: inset 0 -15px 25px rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+  .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 85% 10%, rgba(255,255,255,0.28), transparent 45%), radial-gradient(circle at 10% 100%, rgba(191,217,247,0.25), transparent 55%); pointer-events: none; }
+  .hero::after { content: ""; position: absolute; top: -40%; right: -10%; width: 60%; height: 180%; background: linear-gradient(200deg, rgba(255,255,255,0.16) 0%, transparent 40%); transform: rotate(12deg); pointer-events: none; }
+  .hero-content { max-width: 600px; position: relative; z-index: 1; }
+  .hero-subtitle { font-family: 'Poppins', sans-serif; font-style: italic; color: var(--gold-light); font-size: clamp(16px, 3vw, 18px); margin-bottom: 8px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .hero-title { font-family: 'Poppins', sans-serif; font-size: clamp(32px, 6vw, 52px); line-height: 1.05; margin-bottom: 16px; font-weight: 700; letter-spacing: -0.04em; text-shadow: 0 8px 18px rgba(23, 65, 95, 0.35); }
+  .hero-tagline { font-family: 'Poppins', sans-serif; font-size: clamp(18px, 4vw, 24px); font-style: italic; color: var(--gold-light); margin-bottom: 16px; text-shadow: 0 8px 18px rgba(23, 65, 95, 0.35); }
+  .hero-desc { font-size: clamp(13px, 2vw, 14px); opacity: 0.95; margin-bottom: 32px; max-width: 480px; color: rgba(255,255,255,0.94); }
+  .hero-btn { background: linear-gradient(135deg, var(--gold-light), #ffffff); color: var(--primary-deep); padding: 14px 30px; border-radius: 999px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: none; font-size: 15px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 12px 24px rgba(79, 168, 220, 0.32); }
+  .hero-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 26px rgba(79, 168, 220, 0.4); }
+  
+  /* Tabs */
+  .tabs-wrapper { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: -24px 0 32px 0; position: relative; z-index: 10; padding: 0 20px;}
+  .tab-btn { background: linear-gradient(180deg, var(--white), var(--bg-soft)); border: 1px solid rgba(79, 168, 220, 0.35); color: var(--primary-deep); padding: 12px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 6px 14px rgba(45, 125, 179, 0.10); flex: 1; max-width: 250px;}
+  .tab-btn:hover { transform: translateY(-1px); }
+  .tab-btn.active { background: linear-gradient(135deg, var(--primary-dark), var(--primary-deep)); color: var(--white); border-color: transparent; box-shadow: 0 10px 22px rgba(45, 125, 179, 0.30); }
+  .tab-btn svg { width: 18px; height: 18px; }
+
+  /* Main Layout */
+  .main-grid { display: flex; gap: 24px; align-items: flex-start; padding-bottom: 60px; flex-wrap: wrap;}
+  .content-col { flex: 1 1 60%; min-width: 0; }
+  .sidebar-col { flex: 1 1 320px; max-width: 360px; display: flex; flex-direction: column; gap: 24px; position: sticky; top: 90px; }
+
+  /* Section Cards */
+  .section-card { background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(240,249,255,0.96)); border: 1px solid var(--border-color); border-radius: 16px; padding: clamp(16px, 4vw, 24px); box-shadow: var(--shadow-card); }
+  .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;}
+  .section-title { font-size: clamp(18px, 3vw, 22px); font-weight: 600; color: var(--primary-dark); }
+  .link-all { font-size: 13px; color: var(--text-muted); font-weight: 500; text-decoration: none; display: flex; align-items: center; gap: 4px; }
+
+  /* Candidate Grid */
+  .candidates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: clamp(10px, 1.8vw, 18px); }
+  .c-card { background: linear-gradient(180deg, #ffffff, #f4fbff); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); display: flex; flex-direction: column; box-shadow: 0 10px 20px rgba(45, 125, 179, 0.08); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .c-card:hover { transform: translateY(-2px); box-shadow: 0 14px 22px rgba(45, 125, 179, 0.16); }
+  .c-card .img-wrapper { position: relative; background: linear-gradient(180deg, var(--primary-light), var(--primary-dark)); aspect-ratio: 3 / 4; }
+  .c-card .img-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.95; }
+  .c-card .badge { position: absolute; top: 8px; left: 8px; background: rgba(255,255,255,0.9); color: var(--primary-deep); font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; z-index: 2; box-shadow: 0 4px 12px rgba(45, 125, 179, 0.14); }
+  .c-card .info { padding: 10px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 10px;}
+  .c-card .name { font-family: 'Poppins', sans-serif; font-size: clamp(15px, 2.5vw, 17px); font-weight: 600; color: var(--primary-deep); margin-bottom: 4px; line-height: 1.2;}
+  .c-card .tagline { font-size: 11px; color: var(--text-muted); line-height: 1.3; }
+  .c-card .btn-vote { background: linear-gradient(135deg, var(--primary-dark), var(--primary-deep)); color: var(--white); border: none; padding: 9px 10px; border-radius: 24px; font-size: 12.5px; font-weight: 700; cursor: pointer; width: 100%; display: flex; justify-content: center; align-items: center; gap: 6px; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 10px 16px rgba(45, 125, 179, 0.28); }
+  .c-card .btn-vote:hover { background: linear-gradient(135deg, var(--primary-light), var(--primary-dark)); color: var(--primary-deep); transform: translateY(-1px); box-shadow: 0 12px 18px rgba(45, 125, 179, 0.26); }
+
+  /* Cara Voting (Horizontal Steps) */
+  .cara-voting-card { margin-top: 24px; background: var(--bg-main); border: 1px solid var(--border-color); }
+  .cv-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .cv-header svg { fill: var(--gold); width: 28px; height: 28px; }
+  .cv-steps { display: flex; justify-content: space-between; align-items: flex-start; text-align: center; gap: 10px; }
+  .cv-step { flex: 1; display: flex; flex-direction: column; align-items: center;}
+  .cv-icon { width: clamp(40px, 8vw, 48px); height: clamp(40px, 8vw, 48px); background: var(--primary-dark); color: var(--gold-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .cv-title { font-size: clamp(11px, 2vw, 13px); font-weight: 600; color: var(--primary-dark); margin-bottom: 4px; line-height: 1.2;}
+  .cv-desc { font-size: 10px; color: var(--text-muted); max-width: 120px; line-height: 1.3; }
+  .cv-arrow { color: var(--gold); font-size: 18px; margin-top: 14px; }
+
+  /* Cart Sidebar */
+  .cart-card { background: var(--bg-main); border: 1px solid var(--border-color); position: relative; overflow: hidden;}
+  .cart-header { display: flex; align-items: center; gap: 10px; font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 600; color: var(--primary-dark); margin-bottom: 16px; }
+  .cart-price { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 16px; }
+  .cart-items { min-height: 40px; margin-bottom: 16px; border-bottom: 1px dashed var(--border-color); padding-bottom: 16px;}
+  .cart-item { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; align-items: center;}
+  .qty-input { width: 50px; padding: 4px; border: 1px solid var(--border-color); border-radius: 4px; text-align: center; font-family: inherit; }
+  .cart-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+  .btn-checkout { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--primary-deep); border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 10px 18px rgba(79, 168, 220, 0.24); }
+  .btn-checkout:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-checkout-attn { animation: checkout-pulse 1.6s ease; }
+  @keyframes checkout-pulse {
+    0%, 100% { box-shadow: 0 10px 18px rgba(79, 168, 220, 0.24); }
+    30%, 60% { box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.55), 0 10px 18px rgba(79, 168, 220, 0.24); }
+  }
+  .cart-ornament { position: absolute; top: 0; right: 0; width: 80px; opacity: 0.1; pointer-events: none;}
+
+  /* Leaderboard Sidebar */
+  .lb-card { background: linear-gradient(180deg, var(--primary-dark), var(--primary-deep)); color: var(--white); border: none; scroll-margin-top: 100px; box-shadow: 0 18px 32px rgba(45, 125, 179, 0.28); }
+  .lb-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .lb-title { font-family: 'Poppins', sans-serif; font-size: clamp(16px, 3vw, 18px); font-weight: 600; color: var(--gold-light); display: flex; align-items: center; gap: 8px;}
+  .lb-live { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: #4ADE80; }
+  .lb-live::before { content: ""; width: 6px; height: 6px; background: #4ADE80; border-radius: 50%; animation: pulse 1.5s infinite; }
+  
+  .lb-list { display: flex; flex-direction: column; gap: 16px; }
+  .lb-item { display: flex; align-items: center; gap: 12px; }
+  .lb-rank { width: 24px; height: 24px; background: var(--gold); color: var(--primary-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0;}
+  .lb-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold-light); flex-shrink: 0;}
+  .lb-details { flex: 1; }
+  .lb-name-pct { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .lb-bar-track { height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+  .lb-bar-fill { height: 100%; background: var(--gold); border-radius: 4px; transition: width 0.5s ease; }
+
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+  /* Podium Top 3 - halaman paling atas */
+  .podium-section { position: relative; background: linear-gradient(120deg, var(--primary-dark) 0%, var(--primary-deep) 55%, var(--primary-mid) 100%); padding: clamp(28px, 5vw, 44px) 0 clamp(36px, 6vw, 52px); overflow: hidden; }
+  .podium-section::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 18% 0%, rgba(255,255,255,0.3), transparent 50%), radial-gradient(circle at 85% 100%, rgba(191,217,247,0.22), transparent 55%); pointer-events: none; }
+  .podium-section::after { content: ""; position: absolute; top: -60%; left: 55%; width: 50%; height: 220%; background: linear-gradient(200deg, rgba(255,255,255,0.14) 0%, transparent 42%); transform: rotate(8deg); pointer-events: none; }
+  .podium-head { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; margin-bottom: clamp(20px, 4vw, 32px); flex-wrap: wrap; gap: 10px; }
+  .podium-head h2 { color: var(--white); font-size: clamp(19px, 3vw, 25px); font-weight: 700; display: flex; align-items: center; gap: 8px; text-shadow: 0 8px 20px rgba(6,20,48,0.4); }
+  .podium-head .lb-live { color: #4ADE80; }
+  .podium-wrap { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: center; gap: clamp(8px, 3vw, 28px); flex-wrap: wrap; }
+  .podium-card { display: flex; flex-direction: column; align-items: center; text-align: center; width: 130px; }
+  .podium-crown { font-size: 26px; margin-bottom: 2px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.35)); }
+  .podium-avatar-wrap { position: relative; border-radius: 50%; padding: 4px; margin-bottom: 10px; background: linear-gradient(135deg, #ffffff, var(--gold)); box-shadow: 0 14px 28px rgba(6,20,48,0.35), 0 0 0 4px rgba(255,255,255,0.12); }
+  .podium-first .podium-avatar-wrap { padding: 5px; background: linear-gradient(135deg, #ffffff, var(--gold), var(--primary-dark)); box-shadow: 0 18px 34px rgba(23,65,95,0.4), 0 0 0 5px rgba(137,207,240,0.3); }
+  .podium-avatar { display: block; border-radius: 50%; object-fit: cover; background: var(--primary-deep); }
+  .podium-first .podium-avatar { width: 104px; height: 104px; }
+  .podium-second .podium-avatar, .podium-third .podium-avatar { width: 76px; height: 76px; }
+  .podium-rank-badge { position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; color: var(--primary-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #fff; }
+  .podium-rank-badge.r1 { background: linear-gradient(135deg, #ffffff, var(--gold)); width: 30px; height: 30px; font-size: 13px; }
+  .podium-rank-badge.r2 { background: linear-gradient(135deg, #F4F8FF, var(--silver)); }
+  .podium-rank-badge.r3 { background: linear-gradient(135deg, #E9C9A2, var(--bronze)); }
+  .podium-name { color: var(--white); font-weight: 700; font-size: 13.5px; line-height: 1.25; margin-bottom: 4px; max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .podium-pct { color: var(--white); font-weight: 800; font-size: 15px; margin-bottom: 10px; }
+  .podium-first .podium-pct { font-size: 17px; }
+  .podium-first .podium-name { font-size: 15.5px; }
+  .podium-base { width: 100%; border-radius: 14px 14px 0 0; background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06)); backdrop-filter: blur(6px); display: flex; align-items: flex-start; justify-content: center; padding-top: 10px; color: #fff; font-weight: 800; font-family: 'Poppins', sans-serif; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 -6px 18px rgba(6,20,48,0.2); }
+  .podium-base.b1 { height: 84px; font-size: 30px; background: linear-gradient(180deg, rgba(137,207,240,0.4), rgba(255,255,255,0.06)); }
+  .podium-base.b2 { height: 58px; font-size: 22px; }
+  .podium-base.b3 { height: 42px; font-size: 20px; }
+  /* Footer baru (desain screenshot 16 Nov 2026) */
+  .site-footer { background: var(--primary-dark); color: #fff; }
+  .footer-main { max-width: 1280px; margin: 0 auto; padding: 36px 20px 28px; display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .footer-brand { max-width: 560px; }
+  .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .footer-logo img { width: 48px; height: 48px; border-radius: 12px; background: #fff; object-fit: cover; }
+  .footer-logo .fname { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: 1px; line-height: 1.1; }
+  .footer-logo .ftag { font-size: 10px; letter-spacing: 2px; opacity: 0.85; }
+  .footer-desc { font-size: 13.5px; line-height: 1.6; opacity: 0.92; margin-bottom: 18px; }
+  .footer-org { border-left: 3px solid rgba(255,255,255,0.5); padding-left: 12px; margin-bottom: 18px; }
+  .footer-org strong { display: block; font-size: 14px; margin-bottom: 2px; }
+  .footer-org span { font-size: 13px; opacity: 0.9; }
+  .footer-ig-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, #F58529, #DD2A7B 55%, #8134AF); color: #fff; text-decoration: none; font-weight: 700; font-size: 13.5px; padding: 10px 20px; border-radius: 999px; box-shadow: 0 8px 18px rgba(0,0,0,0.25); }
+  .footer-ig-btn svg { width: 16px; height: 16px; fill: #fff; }
+  .footer-links-col h4 { font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .footer-links-col h4::after { content: ""; width: 28px; height: 2px; background: rgba(255,255,255,0.6); }
+  .footer-links-col a { display: block; color: rgba(255,255,255,0.92); text-decoration: none; font-size: 13.5px; margin-bottom: 10px; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.25); }
+  .footer-bottom-in { max-width: 1280px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 12.5px; color: rgba(255,255,255,0.85); }
+  .footer-social { display: flex; gap: 10px; }
+  .footer-social a { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 14px rgba(0,0,0,0.25); }
+  .footer-social a.ig { background: linear-gradient(135deg, #F58529, #DD2A7B 50%, #8134AF); }
+  .footer-social a.wa { background: #25D366; }
+  .footer-social svg { width: 18px; height: 18px; fill: #fff; }
+  .podium-empty { color: rgba(255,255,255,0.85); font-size: 13px; position: relative; z-index: 1; padding: 20px 0; }
+  @media(max-width: 560px) {
+    .podium-card { width: 96px; }
+    .podium-first .podium-avatar { width: 84px; height: 84px; }
+    .podium-second .podium-avatar, .podium-third .podium-avatar { width: 62px; height: 62px; }
+  }
+
+  /* Modals */
+  .overlay { position: fixed; inset: 0; background: rgba(12,30,69,0.85); display: none; align-items: center; justify-content: center; z-index: 100; backdrop-filter: blur(4px); padding: 16px;}
+  .modal { background: linear-gradient(180deg, #ffffff, #f4fbff); padding: clamp(20px, 5vw, 32px); border-radius: 18px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 22px 48px rgba(45, 125, 179, 0.28); max-height: 95vh; overflow-y: auto; }
+  .modal h3 { font-size: clamp(20px, 4vw, 24px); color: var(--primary-dark); margin-bottom: 8px;}
+  .checkout-summary { background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: 8px; margin-bottom: 20px; text-align: left; }
+  .summary-row { display: flex; justify-content: space-between; font-size: 13.5px; margin-bottom: 8px; }
+  .summary-row.total { border-top: 1px dashed #ccc; padding-top: 12px; margin-top: 4px; font-weight: 700; font-size: 16px; color: var(--primary-dark); }
+  .qr-container { background: #fff; border: 1px solid #ddd; padding: 12px; border-radius: 12px; display: inline-block; margin-bottom: 20px; }
+  .qr-container img { width: min(220px, 100%); height: auto; display: block; margin: 0 auto; }
+  .modal-btn { background: var(--primary-dark); color: var(--white); border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600; font-size: 14px; transition: 0.2s;}
+  .modal-btn:hover { background: var(--primary-light); }
+  .modal-btn-outline { background: transparent; color: var(--primary-dark); border: 1px solid var(--primary-dark); padding: 12px 20px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600; font-size: 14px; margin-bottom: 10px; display: block; text-decoration: none;}
+  .modal-btn-outline:hover { background: rgba(12,30,69,0.05); }
+  .modal-btn-cancel { background: transparent; color: var(--text-muted); border: none; margin-top: 12px; font-weight: 500; font-size: 13px; cursor: pointer; width: 100%;}
+  .modal-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .upload-form { text-align: left; margin-bottom: 10px; }
+  .upload-form label { display: block; font-size: 12px; font-weight: 600; color: var(--primary-dark); margin: 10px 0 4px; }
+  .upload-form label .opt { font-weight: 400; color: var(--text-muted); }
+  .upload-form input[type="text"], .upload-form input[type="tel"] { width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; font-size: 13px; box-sizing: border-box; }
+  .upload-form input[readonly] { background: var(--bg-main); color: var(--text-muted); }
+  .upload-form input[type="file"] { width: 100%; font-size: 12px; font-family: inherit; }
+  .upload-form .modal-btn-outline { margin-top: 14px; margin-bottom: 0; }
+  .upload-status { font-size: 12.5px; font-weight: 500; color: var(--primary-dark); margin-top: 10px; min-height: 18px; text-align: center; }
+  
+  .admin-input-group { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 12px 0; text-align: left;}
+  .admin-input-group label { font-size: 13px; font-weight: 600; color: var(--primary-dark); flex: 1; display:flex; align-items:center; gap:6px; flex-wrap: wrap;}
+  .admin-input-group input { width: 60px; padding: 6px; border: 1px solid var(--border-color); border-radius: 6px; text-align: center; margin-right: 10px;}
+  .admin-save-btn { background: var(--gold); color: var(--primary-dark); border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 700;}
+
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: linear-gradient(135deg, var(--primary-dark), var(--primary-deep)); color: var(--white); padding: 14px 24px; border-radius: 10px; font-size: 13px; font-weight: 500; box-shadow: 0 12px 24px rgba(45, 125, 179, 0.28); border: 1px solid rgba(255,255,255,0.15); opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 200; display: flex; align-items: center; gap: 10px; width: max-content; max-width: 90vw;}
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  #loading-screen { position: fixed; inset: 0; background: var(--primary-dark); z-index: 999; display: flex; align-items: center; justify-content: center; flex-direction: column; font-family: 'Poppins', sans-serif; font-size: 18px; color: var(--gold-light); text-align: center; padding: 20px;}
+
+  /* Media Queries Responsif Spesifik */
+  @media(min-width: 600px) {
+    .candidates-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  }
+  
+  @media(max-width: 900px) {
+    .sidebar-col { max-width: 100%; position: static; }
+    .cv-steps { flex-direction: column; gap: 16px; align-items: center; }
+    .cv-step { flex-direction: row; text-align: left; gap: 16px; width: 100%; max-width: 300px; }
+    .cv-icon { margin: 0; flex-shrink: 0;}
+    .cv-arrow { transform: rotate(90deg); margin: 0; height: 20px;}
+    .nav-links { display: none; }
+  }
+</style>
+<style>
+  .legal-doc { padding: 36px 0 56px; }
+  .legal-crumb { font-size: 13px; margin-bottom: 14px; }
+  .legal-crumb a { color: var(--primary-dark); text-decoration: none; font-weight: 600; }
+  .legal-doc h1 { font-size: clamp(24px, 4vw, 32px); color: var(--primary-dark); margin-bottom: 6px; }
+  .legal-updated { color: var(--text-muted); font-size: 13px; margin-bottom: 8px; }
+  .legal-doc h2 { font-size: 18px; margin: 28px 0 10px; color: var(--primary-dark); }
+  .legal-doc p, .legal-doc li { font-size: 14.5px; line-height: 1.7; color: var(--text-dark); }
+  .legal-doc ul, .legal-doc ol { padding-left: 22px; margin: 8px 0 12px; }
+  .legal-doc li { margin-bottom: 6px; }
+  .legal-doc a { color: var(--primary-dark); }
+  .legal-back { margin-top: 36px; }
+  .legal-back a { display: inline-block; background: var(--primary-dark); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 11px 22px; border-radius: 999px; }
+  .faq-item { border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 12px; background: #fff; overflow: hidden; }
+  .faq-item summary { cursor: pointer; padding: 14px 16px; font-weight: 600; font-size: 14.5px; list-style: none; color: var(--text-dark); }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: "+"; float: right; color: var(--primary-dark); font-weight: 800; }
+  .faq-item[open ] summary::after { content: "\2013"; }
+  .faq-item .faq-a { padding: 0 16px 14px; font-size: 14px; line-height: 1.7; color: var(--text-dark); }
+  .contact-box { background: var(--bg-soft); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px 18px; margin-top: 28px; }
+  .contact-box p { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <img src="logo.jpg" alt="NaGa.Tix" style="width:32px;height:32px;border-radius:50%;object-fit:cover;">
+      <div>NaGa.Tix<span>E-VOTING BALANGAN</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+      <a href="index.html#kandidat">Kandidat</a>
+      <a href="index.html#tata-cara">Tata Cara</a>
+      <a href="index.html#hasil">Hasil</a>
+    </div>
+  </div>
+</nav>
+<main class="legal-doc">
+  <div class="container">
+    <p class="legal-crumb"><a href="index.html">&larr; Beranda</a></p>
+    <h1>Kebijakan Privasi</h1>
+    <p class="legal-updated">Terakhir diperbarui: 16 November 2026</p>
+
+<p>Kebijakan Privasi ini menjelaskan data pribadi apa yang kami kumpulkan, untuk apa data tersebut digunakan, dan apa hak-hak Anda. Kebijakan ini disusun berdasarkan Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP) yang berlaku penuh sejak 17 Oktober 2024.</p>
+
+<h2>1. Pengendali Data Pribadi</h2>
+<p>Pengendali data pribadi pada Platform ini adalah <strong>Muhammad Khairullah (NaGa.Tix)</strong>, selaku pengembang dan pengelola Platform. Kontak: Instagram <a href="https://www.instagram.com/naga.tix?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">@naga.tix</a>, WhatsApp <a href="https://wa.me/6282253593653" target="_blank" rel="noopener">0822-5359-3653</a>.</p>
+
+<h2>2. Data yang Kami Kumpulkan</h2>
+<ul>
+<li><strong>Data yang Anda berikan</strong>: nama pemilih, nomor WhatsApp (opsional), ID transaksi, kandidat dan jumlah vote, total pembayaran, serta file bukti transfer (gambar atau PDF).</li>
+<li><strong>Data teknis yang tercatat otomatis</strong> oleh penyedia layanan hosting dan basis data: alamat IP, jenis perangkat dan peramban, serta waktu akses.</li>
+<li>Kami <strong>tidak pernah</strong> meminta kata sandi, PIN, atau data rekening bank Anda.</li>
+</ul>
+
+<h2>3. Tujuan Penggunaan Data</h2>
+<ul>
+<li>Memverifikasi pembayaran dan mencatat vote Anda.</li>
+<li>Menghubungi Anda untuk keperluan konfirmasi atau klarifikasi transaksi.</li>
+<li>Menjaga keamanan Platform dan mencegah kecurangan, misalnya bukti transfer palsu.</li>
+<li>Menyusun rekapitulasi hasil pemilihan untuk Penyelenggara.</li>
+</ul>
+
+<h2>4. Dasar Hukum Pemrosesan</h2>
+<p>Pemrosesan data pribadi dilakukan berdasarkan <strong>persetujuan Anda</strong> saat menggunakan Platform, sebagaimana diatur dalam UU PDP.</p>
+
+<h2>5. Penyimpanan dan Keamanan Data</h2>
+<p>Data disimpan pada layanan Firebase Realtime Database (Google) dan Netlify Forms, dengan akses terbatas pada Pengembang dan panitia Penyelenggara. Kami menerapkan langkah-langkah keamanan yang wajar untuk melindungi data Anda; namun demikian, tidak ada sistem yang dapat menjamin keamanan mutlak.</p>
+
+<h2>6. Berbagi Data</h2>
+<p>Kami <strong>tidak menjual atau memperjualbelikan</strong> data pribadi Anda. Data hanya dibagikan kepada Penyelenggara (Yayasan Pawadahan Nanang Galuh Balangan) untuk keperluan penyelenggaraan pemilihan, atau kepada pihak berwenang apabila diwajibkan oleh hukum.</p>
+
+<h2>7. Hak-Hak Anda</h2>
+<p>Berdasarkan UU PDP, Anda berhak untuk:</p>
+<ul>
+<li>Memperoleh informasi tentang pemrosesan data Anda.</li>
+<li>Mengakses dan meminta salinan data pribadi Anda.</li>
+<li>Memperbaiki data yang tidak akurat atau tidak lengkap.</li>
+<li>Meminta penghapusan atau pemusnahan data dalam kondisi tertentu.</li>
+<li>Mencabut persetujuan atas pemrosesan data Anda.</li>
+<li>Mengajukan keberatan atas pemrosesan data Anda.</li>
+<li>Menuntut ganti rugi apabila terjadi pelanggaran atas pemrosesan data pribadi Anda.</li>
+</ul>
+<p>Untuk menggunakan hak-hak tersebut, hubungi kami melalui Instagram <a href="https://www.instagram.com/naga.tix?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">@naga.tix</a> atau WhatsApp <a href="https://wa.me/6282253593653" target="_blank" rel="noopener">0822-5359-3653</a>.</p>
+
+<h2>8. Retensi Data</h2>
+<p>Data disimpan selama diperlukan untuk penyelenggaraan pemilihan dan proses verifikasi, setelah itu dihapus atau dianonimkan.</p>
+
+<h2>9. Perubahan Kebijakan</h2>
+<p>Kebijakan ini dapat diperbarui sewaktu-waktu. Versi terbaru selalu tersedia di halaman ini dan berlaku sejak diterbitkan.</p>
+
+<h2>10. Kontak</h2>
+<p>Pertanyaan mengenai Kebijakan Privasi ini dapat disampaikan melalui kanal berikut:</p>
+<div class="contact-box">
+<p><strong>Kontak Panitia</strong></p>
+<p>Instagram: <a href="https://www.instagram.com/naga.tix?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">@naga.tix</a> dan <a href="https://www.instagram.com/nagabalangan?utm_source=ig_web_button_share_sheet&obrf=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">@nagabalangan</a></p>
+<p>WhatsApp: <a href="https://wa.me/6282253593653" target="_blank" rel="noopener">0822-5359-3653</a></p>
+</div>
+
+    <div class="legal-back"><a href="index.html">&larr; Kembali ke Beranda</a></div>
+  </div>
+</main>
+<footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="logo.jpg" alt="NaGa.Tix">
+          <div>
+            <div class="fname">NAGA.TIX</div>
+            <div class="ftag">MEDIA PARTNER EVENT BY TICKETING &amp; VOTING</div>
+          </div>
+        </div>
+        <p class="footer-desc">Platform e-ticketing dan voting pageant online terpercaya di Kalimantan Selatan. Menyediakan layanan manajemen event, ticketing modern, dan pemungutan suara transparan &amp; akurat.</p>
+        <div class="footer-org">
+          <strong>Yayasan Pawadahan Nanang Galuh Balangan</strong>
+          <span>Jl. A. Yani Km. 2,5, Batu Piring, Paringin Selatan, Kabupaten Balangan, Kalimantan Selatan 71662</span>
+        </div>
+        <a class="footer-ig-btn" href="https://www.instagram.com/naga.tix?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener"><svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>Hubungi via Instagram</a>
+      </div>
+      <div class="footer-links-col">
+        <h4>DUKUNGAN</h4>
+        <a href="syarat-ketentuan.html">Syarat &amp; Ketentuan</a>
+        <a href="kebijakan-privasi.html">Kebijakan Privasi</a>
+        <a href="bantuan-faq.html">Bantuan / FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-in">
+        <div>&copy; 2026 NAGA.TIX - By PNGBLG. All Rights Reserved. <span id="admin-secret-trigger" style="opacity:0.6; font-size:11px; cursor:pointer; user-select:none;" title="Klik 5x untuk admin">&bull;</span></div>
+        <div class="footer-social">
+          <a class="ig" href="https://www.instagram.com/nagabalangan?utm_source=ig_web_button_share_sheet&obrf=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+          <a class="wa" href="https://wa.me/6282253593653" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

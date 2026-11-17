@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NaGa.Tix - E-Voting Nanang Galuh Balangan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #F2FAFE;
+    --bg-soft: #E4F5FC;
+    --primary-dark: #2D7DB3;
+    --primary-deep: #4FA8DC;
+    --primary-mid: #89CFF0;
+    --primary-light: #C9ECFB;
+    --gold: #89CFF0;
+    --gold-light: #EDF9FF;
+    --silver: #D8EFFB;
+    --bronze: #D8B589;
+    --text-dark: #17415F;
+    --text-muted: #5C89A3;
+    --border-color: #D2EBFA;
+    --white: #FFFFFF;
+    --shadow-soft: 0 10px 28px rgba(45, 125, 179, 0.16);
+    --shadow-card: 0 16px 34px rgba(45, 125, 179, 0.14);
+    --shadow-glow: 0 0 0 1px rgba(255,255,255,0.5) inset, 0 18px 40px rgba(45, 125, 179, 0.28);
+  }
+  
+  * { box-sizing: border-box; font-family: 'Work Sans', sans-serif; margin: 0; padding: 0; }
+  body { background-color: var(--bg-main); color: var(--text-dark); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, .font-serif { font-family: 'Poppins', sans-serif; }
+  
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+  
+  /* Navbar */
+  nav { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-deep) 55%, var(--primary-mid) 100%); color: var(--white); padding: 16px 0; border-bottom: 2px solid rgba(255,255,255,0.28); position: sticky; top: 0; z-index: 50; box-shadow: 0 10px 24px rgba(45, 125, 179, 0.28); overflow: hidden; }
+  nav::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 15% -20%, rgba(255,255,255,0.35), transparent 55%); pointer-events: none; }
+  .nav-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+  .nav-brand { display: flex; align-items: center; gap: 10px; }
+  .nav-brand svg { width: 28px; height: 28px; fill: var(--gold); }
+  .nav-brand div { font-family: 'Poppins', sans-serif; font-size: clamp(14px, 2vw, 16px); line-height: 1.2; font-weight: 600; letter-spacing: 1px; color: var(--gold-light); text-transform: uppercase;}
+  .nav-brand span { display: block; font-size: 10px; font-family: 'Work Sans', sans-serif; letter-spacing: 2px; }
+  .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; }
+  .nav-links a { color: rgba(255,255,255,0.9); text-decoration: none; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: 0.2s; }
+  .nav-links a.active, .nav-links a:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+  /* Hero Section */
+  .hero { 
+    position: relative; 
+    background-color: var(--primary-dark);
+    background-image: linear-gradient(115deg, rgba(45,125,179,0.95) 0%, rgba(79,168,220,0.88) 40%, rgba(137,207,240,0.7) 75%, rgba(201,236,251,0.35) 100%); 
+    background-size: cover; 
+    background-position: center; 
+    color: var(--white); 
+    padding: clamp(50px, 8vw, 80px) 0; 
+    border-bottom: 6px solid rgba(255,255,255,0.3);
+    box-shadow: inset 0 -15px 25px rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+  .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 85% 10%, rgba(255,255,255,0.28), transparent 45%), radial-gradient(circle at 10% 100%, rgba(191,217,247,0.25), transparent 55%); pointer-events: none; }
+  .hero::after { content: ""; position: absolute; top: -40%; right: -10%; width: 60%; height: 180%; background: linear-gradient(200deg, rgba(255,255,255,0.16) 0%, transparent 40%); transform: rotate(12deg); pointer-events: none; }
+  .hero-content { max-width: 600px; position: relative; z-index: 1; }
+  .hero-subtitle { font-family: 'Poppins', sans-serif; font-style: italic; color: var(--gold-light); font-size: clamp(16px, 3vw, 18px); margin-bottom: 8px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .hero-title { font-family: 'Poppins', sans-serif; font-size: clamp(32px, 6vw, 52px); line-height: 1.05; margin-bottom: 16px; font-weight: 700; letter-spacing: -0.04em; text-shadow: 0 8px 18px rgba(23, 65, 95, 0.35); }
+  .hero-tagline { font-family: 'Poppins', sans-serif; font-size: clamp(18px, 4vw, 24px); font-style: italic; color: var(--gold-light); margin-bottom: 16px; text-shadow: 0 8px 18px rgba(23, 65, 95, 0.35); }
+  .hero-desc { font-size: clamp(13px, 2vw, 14px); opacity: 0.95; margin-bottom: 32px; max-width: 480px; color: rgba(255,255,255,0.94); }
+  .hero-btn { background: linear-gradient(135deg, var(--gold-light), #ffffff); color: var(--primary-deep); padding: 14px 30px; border-radius: 999px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: none; font-size: 15px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 12px 24px rgba(79, 168, 220, 0.32); }
+  .hero-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 26px rgba(79, 168, 220, 0.4); }
+  
+  /* Tabs */
+  .tabs-wrapper { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: -24px 0 32px 0; position: relative; z-index: 10; padding: 0 20px;}
+  .tab-btn { background: linear-gradient(180deg, var(--white), var(--bg-soft)); border: 1px solid rgba(79, 168, 220, 0.35); color: var(--primary-deep); padding: 12px 32px; border-radius: 30px; font-weight: 600; font-size: 14px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 6px 14px rgba(45, 125, 179, 0.10); flex: 1; max-width: 250px;}
+  .tab-btn:hover { transform: translateY(-1px); }
+  .tab-btn.active { background: linear-gradient(135deg, var(--primary-dark), var(--primary-deep)); color: var(--white); border-color: transparent; box-shadow: 0 10px 22px rgba(45, 125, 179, 0.30); }
+  .tab-btn svg { width: 18px; height: 18px; }
+
+  /* Main Layout */
+  .main-grid { display: flex; gap: 24px; align-items: flex-start; padding-bottom: 60px; flex-wrap: wrap;}
+  .content-col { flex: 1 1 60%; min-width: 0; }
+  .sidebar-col { flex: 1 1 320px; max-width: 360px; display: flex; flex-direction: column; gap: 24px; position: sticky; top: 90px; }
+
+  /* Section Cards */
+  .section-card { background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(240,249,255,0.96)); border: 1px solid var(--border-color); border-radius: 16px; padding: clamp(16px, 4vw, 24px); box-shadow: var(--shadow-card); }
+  .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;}
+  .section-title { font-size: clamp(18px, 3vw, 22px); font-weight: 600; color: var(--primary-dark); }
+  .link-all { font-size: 13px; color: var(--text-muted); font-weight: 500; text-decoration: none; display: flex; align-items: center; gap: 4px; }
+
+  /* Candidate Grid */
+  .candidates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: clamp(10px, 1.8vw, 18px); }
+  .c-card { background: linear-gradient(180deg, #ffffff, #f4fbff); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); display: flex; flex-direction: column; box-shadow: 0 10px 20px rgba(45, 125, 179, 0.08); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .c-card:hover { transform: translateY(-2px); box-shadow: 0 14px 22px rgba(45, 125, 179, 0.16); }
+  .c-card .img-wrapper { position: relative; background: linear-gradient(180deg, var(--primary-light), var(--primary-dark)); aspect-ratio: 3 / 4; }
+  .c-card .img-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0.95; }
+  .c-card .badge { position: absolute; top: 8px; left: 8px; background: rgba(255,255,255,0.9); color: var(--primary-deep); font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; z-index: 2; box-shadow: 0 4px 12px rgba(45, 125, 179, 0.14); }
+  .c-card .info { padding: 10px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 10px;}
+  .c-card .name { font-family: 'Poppins', sans-serif; font-size: clamp(15px, 2.5vw, 17px); font-weight: 600; color: var(--primary-deep); margin-bottom: 4px; line-height: 1.2;}
+  .c-card .tagline { font-size: 11px; color: var(--text-muted); line-height: 1.3; }
+  .c-card .btn-vote { background: linear-gradient(135deg, var(--primary-dark), var(--primary-deep)); color: var(--white); border: none; padding: 9px 10px; border-radius: 24px; font-size: 12.5px; font-weight: 700; cursor: pointer; width: 100%; display: flex; justify-content: center; align-items: center; gap: 6px; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 10px 16px rgba(45, 125, 179, 0.28); }
+  .c-card .btn-vote:hover { background: linear-gradient(135deg, var(--primary-light), var(--primary-dark)); color: var(--primary-deep); transform: translateY(-1px); box-shadow: 0 12px 18px rgba(45, 125, 179, 0.26); }
+
+  /* Cara Voting (Horizontal Steps) */
+  .cara-voting-card { margin-top: 24px; background: var(--bg-main); border: 1px solid var(--border-color); }
+  .cv-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .cv-header svg { fill: var(--gold); width: 28px; height: 28px; }
+  .cv-steps { display: flex; justify-content: space-between; align-items: flex-start; text-align: center; gap: 10px; }
+  .cv-step { flex: 1; display: flex; flex-direction: column; align-items: center;}
+  .cv-icon { width: clamp(40px, 8vw, 48px); height: clamp(40px, 8vw, 48px); background: var(--primary-dark); color: var(--gold-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .cv-title { font-size: clamp(11px, 2vw, 13px); font-weight: 600; color: var(--primary-dark); margin-bottom: 4px; line-height: 1.2;}
+  .cv-desc { font-size: 10px; color: var(--text-muted); max-width: 120px; line-height: 1.3; }
+  .cv-arrow { color: var(--gold); font-size: 18px; margin-top: 14px; }
+
+  /* Cart Sidebar */
+  .cart-card { background: var(--bg-main); border: 1px solid var(--border-color); position: relative; overflow: hidden;}
+  .cart-header { display: flex; align-items: center; gap: 10px; font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 600; color: var(--primary-dark); margin-bottom: 16px; }
+  .cart-price { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 16px; }
+  .cart-items { min-height: 40px; margin-bottom: 16px; border-bottom: 1px dashed var(--border-color); padding-bottom: 16px;}
+  .cart-item { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; align-items: center;}
+  .qty-input { width: 50px; padding: 4px; border: 1px solid var(--border-color); border-radius: 4px; text-align: center; font-family: inherit; }
+  .cart-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; color: var(--primary-dark); margin-bottom: 16px; }
+  .btn-checkout { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--primary-deep); border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 10px 18px rgba(79, 168, 220, 0.24); }
+  .btn-checkout:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-checkout-attn { animation: checkout-pulse 1.6s ease; }
+  @keyframes checkout-pulse {
+    0%, 100% { box-shadow: 0 10px 18px rgba(79, 168, 220, 0.24); }
+    30%, 60% { box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.55), 0 10px 18px rgba(79, 168, 220, 0.24); }
+  }
+  .cart-ornament { position: absolute; top: 0; right: 0; width: 80px; opacity: 0.1; pointer-events: none;}
+
+  /* Leaderboard Sidebar */
+  .lb-card { background: linear-gradient(180deg, var(--primary-dark), var(--primary-deep)); color: var(--white); border: none; scroll-margin-top: 100px; box-shadow: 0 18px 32px rgba(45, 125, 179, 0.28); }
+  .lb-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .lb-title { font-family: 'Poppins', sans-serif; font-size: clamp(16px, 3vw, 18px); font-weight: 600; color: var(--gold-light); display: flex; align-items: center; gap: 8px;}
+  .lb-live { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: #4ADE80; }
+  .lb-live::before { content: ""; width: 6px; height: 6px; background: #4ADE80; border-radius: 50%; animation: pulse 1.5s infinite; }
+  
+  .lb-list { display: flex; flex-direction: column; gap: 16px; }
+  .lb-item { display: flex; align-items: center; gap: 12px; }
+  .lb-rank { width: 24px; height: 24px; background: var(--gold); color: var(--primary-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0;}
+  .lb-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: center top; border: 2px solid var(--gold-light); flex-shrink: 0;}
+  .lb-details { flex: 1; }
+  .lb-name-pct { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .lb-bar-track { height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+  .lb-bar-fill { height: 100%; background: var(--gold); border-radius: 4px; transition: width 0.5s ease; }
+
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+  /* Podium Top 3 - halaman paling atas */
+  .podium-section { position: relative; background: linear-gradient(120deg, var(--primary-dark) 0%, var(--primary-deep) 55%, var(--primary-mid) 100%); padding: clamp(28px, 5vw, 44px) 0 clamp(36px, 6vw, 52px); overflow: hidden; }
+  .podium-section::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 18% 0%, rgba(255,255,255,0.3), transparent 50%), radial-gradient(circle at 85% 100%, rgba(191,217,247,0.22), transparent 55%); pointer-events: none; }
+  .podium-section::after { content: ""; position: absolute; top: -60%; left: 55%; width: 50%; height: 220%; background: linear-gradient(200deg, rgba(255,255,255,0.14) 0%, transparent 42%); transform: rotate(8deg); pointer-events: none; }
+  .podium-head { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; margin-bottom: clamp(20px, 4vw, 32px); flex-wrap: wrap; gap: 10px; }
+  .podium-head h2 { color: var(--white); font-size: clamp(19px, 3vw, 25px); font-weight: 700; display: flex; align-items: center; gap: 8px; text-shadow: 0 8px 20px rgba(6,20,48,0.4); }
+  .podium-head .lb-live { color: #4ADE80; }
+  .podium-wrap { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: center; gap: clamp(8px, 3vw, 28px); flex-wrap: wrap; }
+  .podium-card { display: flex; flex-direction: column; align-items: center; text-align: center; width: 130px; }
+  .podium-crown { font-size: 26px; margin-bottom: 2px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.35)); }
+  .podium-avatar-wrap { position: relative; border-radius: 50%; padding: 4px; margin-bottom: 10px; background: linear-gradient(135deg, #ffffff, var(--gold)); box-shadow: 0 14px 28px rgba(6,20,48,0.35), 0 0 0 4px rgba(255,255,255,0.12); }
+  .podium-first .podium-avatar-wrap { padding: 5px; background: linear-gradient(135deg, #ffffff, var(--gold), var(--primary-dark)); box-shadow: 0 18px 34px rgba(23,65,95,0.4), 0 0 0 5px rgba(137,207,240,0.3); }
+  .podium-avatar { display: block; border-radius: 50%; object-fit: cover; object-position: center top; background: var(--primary-deep); }
+  .podium-first .podium-avatar { width: 104px; height: 104px; }
+  .podium-second .podium-avatar, .podium-third .podium-avatar { width: 76px; height: 76px; }
+  .podium-rank-badge { position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; color: var(--primary-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #fff; }
+  .podium-rank-badge.r1 { background: linear-gradient(135deg, #ffffff, var(--gold)); width: 30px; height: 30px; font-size: 13px; }
+  .podium-rank-badge.r2 { background: linear-gradient(135deg, #F4F8FF, var(--silver)); }
+  .podium-rank-badge.r3 { background: linear-gradient(135deg, #E9C9A2, var(--bronze)); }
+  .podium-name { color: var(--white); font-weight: 700; font-size: 13.5px; line-height: 1.25; margin-bottom: 4px; max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .podium-pct { color: var(--white); font-weight: 800; font-size: 15px; margin-bottom: 10px; }
+  .podium-first .podium-pct { font-size: 17px; }
+  .podium-first .podium-name { font-size: 15.5px; }
+  .podium-base { width: 100%; border-radius: 14px 14px 0 0; background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06)); backdrop-filter: blur(6px); display: flex; align-items: flex-start; justify-content: center; padding-top: 10px; color: #fff; font-weight: 800; font-family: 'Poppins', sans-serif; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 -6px 18px rgba(6,20,48,0.2); }
+  .podium-base.b1 { height: 84px; font-size: 30px; background: linear-gradient(180deg, rgba(137,207,240,0.4), rgba(255,255,255,0.06)); }
+  .podium-base.b2 { height: 58px; font-size: 22px; }
+  .podium-base.b3 { height: 42px; font-size: 20px; }
+  /* Footer baru (desain screenshot 16 Nov 2026) */
+  .site-footer { background: var(--primary-dark); color: #fff; }
+  .footer-main { max-width: 1280px; margin: 0 auto; padding: 36px 20px 28px; display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .footer-brand { max-width: 560px; }
+  .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .footer-logo img { width: 48px; height: 48px; border-radius: 12px; background: #fff; object-fit: cover; }
+  .footer-logo .fname { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: 1px; line-height: 1.1; }
+  .footer-logo .ftag { font-size: 10px; letter-spacing: 2px; opacity: 0.85; }
+  .footer-desc { font-size: 13.5px; line-height: 1.6; opacity: 0.92; margin-bottom: 18px; }
+  .footer-org { border-left: 3px solid rgba(255,255,255,0.5); padding-left: 12px; margin-bottom: 18px; }
+  .footer-org strong { display: block; font-size: 14px; margin-bottom: 2px; }
+  .footer-org span { font-size: 13px; opacity: 0.9; }
+  .footer-ig-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, #F58529, #DD2A7B 55%, #8134AF); color: #fff; text-decoration: none; font-weight: 700; font-size: 13.5px; padding: 10px 20px; border-radius: 999px; box-shadow: 0 8px 18px rgba(0,0,0,0.25); }
+  .footer-ig-btn svg { width: 16px; height: 16px; fill: #fff; }
+  .footer-links-col h4 { font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .footer-links-col h4::after { content: ""; width: 28px; height: 2px; background: rgba(255,255,255,0.6); }
+  .footer-links-col a { display: block; color: rgba(255,255,255,0.92); text-decoration: none; font-size: 13.5px; margin-bottom: 10px; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.25); }
+  .footer-bottom-in { max-width: 1280px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 12.5px; color: rgba(255,255,255,0.85); }
+  .footer-social { display: flex; gap: 10px; }
+  .footer-social a { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 14px rgba(0,0,0,0.25); }
+  .footer-social a.ig { background: linear-gradient(135deg, #F58529, #DD2A7B 50%, #8134AF); }
+  .footer-social a.wa { background: #25D366; }
+  .footer-social svg { width: 18px; height: 18px; fill: #fff; }
+  .podium-empty { color: rgba(255,255,255,0.85); font-size: 13px; position: relative; z-index: 1; padding: 20px 0; }
+  @media(max-width: 560px) {
+    .podium-card { width: 96px; }
+    .podium-first .podium-avatar { width: 84px; height: 84px; }
+    .podium-second .podium-avatar, .podium-third .podium-avatar { width: 62px; height: 62px; }
+  }
+
+  /* Modals */
+  .overlay { position: fixed; inset: 0; background: rgba(12,30,69,0.85); display: none; align-items: center; justify-content: center; z-index: 100; backdrop-filter: blur(4px); padding: 16px;}
+  .modal { background: linear-gradient(180deg, #ffffff, #f4fbff); padding: clamp(20px, 5vw, 32px); border-radius: 18px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 22px 48px rgba(45, 125, 179, 0.28); max-height: 95vh; overflow-y: auto; }
+  .modal h3 { font-size: clamp(20px, 4vw, 24px); color: var(--primary-dark); margin-bottom: 8px;}
+  .checkout-summary { background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: 8px; margin-bottom: 20px; text-align: left; }
+  .summary-row { display: flex; justify-content: space-between; font-size: 13.5px; margin-bottom: 8px; }
+  .summary-row.total { border-top: 1px dashed #ccc; padding-top: 12px; margin-top: 4px; font-weight: 700; font-size: 16px; color: var(--primary-dark); }
+  .qr-container { background: #fff; border: 1px solid #ddd; padding: 12px; border-radius: 12px; display: inline-block; margin-bottom: 20px; }
+  .qr-container img { width: min(220px, 100%); height: auto; display: block; margin: 0 auto; }
+  .modal-btn { background: var(--primary-dark); color: var(--white); border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600; font-size: 14px; transition: 0.2s;}
+  .modal-btn:hover { background: var(--primary-light); }
+  .modal-btn-outline { background: transparent; color: var(--primary-dark); border: 1px solid var(--primary-dark); padding: 12px 20px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600; font-size: 14px; margin-bottom: 10px; display: block; text-decoration: none;}
+  .modal-btn-outline:hover { background: rgba(12,30,69,0.05); }
+  .modal-btn-cancel { background: transparent; color: var(--text-muted); border: none; margin-top: 12px; font-weight: 500; font-size: 13px; cursor: pointer; width: 100%;}
+  .modal-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .upload-form { text-align: left; margin-bottom: 10px; }
+  .upload-form label { display: block; font-size: 12px; font-weight: 600; color: var(--primary-dark); margin: 10px 0 4px; }
+  .upload-form label .opt { font-weight: 400; color: var(--text-muted); }
+  .upload-form input[type="text"], .upload-form input[type="tel"] { width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; font-size: 13px; box-sizing: border-box; }
+  .upload-form input[readonly] { background: var(--bg-main); color: var(--text-muted); }
+  .upload-form input[type="file"] { width: 100%; font-size: 12px; font-family: inherit; }
+  .upload-form .modal-btn-outline { margin-top: 14px; margin-bottom: 0; }
+  .upload-status { font-size: 12.5px; font-weight: 500; color: var(--primary-dark); margin-top: 10px; min-height: 18px; text-align: center; }
+  
+  .admin-input-group { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 12px 0; text-align: left;}
+  .admin-input-group label { font-size: 13px; font-weight: 600; color: var(--primary-dark); flex: 1; display:flex; align-items:center; gap:6px; flex-wrap: wrap;}
+  .admin-input-group input { width: 60px; padding: 6px; border: 1px solid var(--border-color); border-radius: 6px; text-align: center; margin-right: 10px;}
+  .admin-save-btn { background: var(--gold); color: var(--primary-dark); border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 700;}
+
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: linear-gradient(135deg, var(--primary-dark), var(--primary-deep)); color: var(--white); padding: 14px 24px; border-radius: 10px; font-size: 13px; font-weight: 500; box-shadow: 0 12px 24px rgba(45, 125, 179, 0.28); border: 1px solid rgba(255,255,255,0.15); opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 200; display: flex; align-items: center; gap: 10px; width: max-content; max-width: 90vw;}
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  #loading-screen { position: fixed; inset: 0; background: var(--primary-dark); z-index: 999; display: flex; align-items: center; justify-content: center; flex-direction: column; font-family: 'Poppins', sans-serif; font-size: 18px; color: var(--gold-light); text-align: center; padding: 20px;}
+
+  /* Media Queries Responsif Spesifik */
+  @media(min-width: 600px) {
+    .candidates-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  }
+  
+  @media(max-width: 900px) {
+    .sidebar-col { max-width: 100%; position: static; }
+    .cv-steps { flex-direction: column; gap: 16px; align-items: center; }
+    .cv-step { flex-direction: row; text-align: left; gap: 16px; width: 100%; max-width: 300px; }
+    .cv-icon { margin: 0; flex-shrink: 0;}
+    .cv-arrow { transform: rotate(90deg); margin: 0; height: 20px;}
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loading-screen">
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 16px; animation: pulse 1s infinite;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+  Menghubungkan ke server NaGa.Tix...
+</div>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <img src="logo.jpg" alt="NaGa.Tix" style="width:32px;height:32px;border-radius:50%;object-fit:cover;">
+      <div>NaGa.Tix<span>E-VOTING BALANGAN</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">Beranda</a>
+      <a href="#kandidat">Kandidat</a>
+      <a href="#tata-cara">Tata Cara</a>
+      <a href="#hasil">Hasil</a>
+    </div>
+  </div>
+</nav>
+
+<div style="display: none;" id="main-content">
+
+  <!-- Podium Top 3 - halaman paling atas -->
+  <section class="podium-section" id="podium-top">
+    <div class="container">
+      <div class="podium-head">
+        <h2>🏆 Podium <span id="podium-cat-title">Nanang</span> Sementara</h2>
+        <div class="lb-live">Live</div>
+      </div>
+      <div class="podium-wrap" id="podium-container">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="container hero-content">
+      <div class="hero-subtitle">-Vote Resmi via NaGa.Tix</div>
+      <h1 class="hero-title">Pemilihan Nanang Galuh Balangan 2026</h1>
+      <p class="hero-desc">Dukung kandidat favorit Anda dalam ajang pemilihan Nanang Galuh Kabupaten Balangan melalui platform NaGa.Tix sistem e-voting yang aman, transparan dan terpercaya.</p>
+      <a href="#kandidat" class="hero-btn">
+        Mulai Voting 
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Tabs System -->
+    <div class="tabs-wrapper" id="kandidat">
+      <button class="tab-btn active" id="tab-nanang" onclick="window.switchTab('nanang')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        Nanang
+      </button>
+      <button class="tab-btn" id="tab-galuh" onclick="window.switchTab('galuh')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        Galuh
+      </button>
+    </div>
+
+    <div class="main-grid">
+      <!-- Left Column (Candidates & Cara Voting) -->
+      <div class="content-col">
+        <!-- Candidates Grid -->
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title" id="grid-title">Kandidat Nanang</h2>
+            <a href="#" class="link-all">Lihat Semua &rarr;</a>
+          </div>
+          <div class="candidates-grid" id="candidates-container">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Cara Voting Step-by-Step -->
+        <div class="section-card cara-voting-card" id="tata-cara">
+          <div class="cv-header">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 4l7.5 14h-15L12 6z"/></svg>
+            <h2 class="section-title">Cara Voting</h2>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Ikuti langkah mudah untuk memberikan suara Anda</p>
+          
+          <div class="cv-steps">
+            <div class="cv-step">
+              <div class="cv-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+              <div>
+                <div class="cv-title">1. Pilih Kategori</div>
+                <div class="cv-desc">Tentukan Nanang atau Galuh</div>
+              </div>
+            </div>
+            <div class="cv-arrow">&rarr;</div>
+            <div class="cv-step">
+              <div class="cv-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg></div>
+              <div>
+                <div class="cv-title">2. Pilih Kandidat</div>
+                <div class="cv-desc">Tentukan kandidat favorit Anda &mdash; satu transaksi hanya untuk satu kandidat</div>
+              </div>
+            </div>
+            <div class="cv-arrow">&rarr;</div>
+            <div class="cv-step">
+              <div class="cv-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+              <div>
+                <div class="cv-title">3. Konfirmasi</div>
+                <div class="cv-desc">Periksa kembali pilihan Anda</div>
+              </div>
+            </div>
+            <div class="cv-arrow">&rarr;</div>
+            <div class="cv-step">
+              <div class="cv-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>
+              <div>
+                <div class="cv-title">4. Pembayaran</div>
+                <div class="cv-desc">Lakukan pembayaran Rp 10.000/vote</div>
+              </div>
+            </div>
+            <div class="cv-arrow">&rarr;</div>
+            <div class="cv-step">
+              <div class="cv-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <div>
+                <div class="cv-title">5. Selesai</div>
+                <div class="cv-desc">Suara Anda telah tercatat</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column (Cart & Leaderboard) -->
+      <div class="sidebar-col">
+        <!-- Cart / Ringkasan Vote -->
+        <div class="section-card cart-card">
+          <svg class="cart-ornament" viewBox="0 0 100 100"><path d="M0 0 L100 0 L100 100 Z" fill="var(--gold)"/></svg>
+          <div class="cart-header">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            Ringkasan Vote
+          </div>
+          <div class="cart-price">Harga per vote: <span style="color: var(--primary-dark);">Rp 10.000</span></div>
+          
+          <div class="cart-items" id="cart-items">
+            <div style="font-size: 13px; color: var(--text-muted); text-align: center; margin-top: 10px;">Belum ada vote yang dipilih</div>
+          </div>
+          
+          <div class="cart-total">
+            <span>Total Bayar:</span>
+            <span id="cart-total-price">Rp 0</span>
+          </div>
+          <button id="btn-checkout" class="btn-checkout" disabled onclick="openCheckout()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            Lanjutkan Pembayaran
+          </button>
+        </div>
+
+        <!-- Leaderboard Sidebar -->
+        <div class="section-card lb-card" id="hasil">
+          <div class="lb-header">
+            <div class="lb-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+              <span id="lb-title">Leaderboard Nanang</span>
+            </div>
+            <div class="lb-live">Live</div>
+          </div>
+          <div class="lb-list" id="leaderboard-container">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="logo.jpg" alt="NaGa.Tix">
+          <div>
+            <div class="fname">NAGA.TIX</div>
+            <div class="ftag">MEDIA PARTNER EVENT BY TICKETING &amp; VOTING</div>
+          </div>
+        </div>
+        <p class="footer-desc">Platform e-ticketing dan voting pageant online terpercaya di Kalimantan Selatan. Menyediakan layanan manajemen event, ticketing modern, dan pemungutan suara transparan &amp; akurat.</p>
+        <div class="footer-org">
+          <strong>Yayasan Pawadahan Nanang Galuh Balangan</strong>
+          <span>Jl. A. Yani Km. 2,5, Batu Piring, Paringin Selatan, Kabupaten Balangan, Kalimantan Selatan 71662</span>
+        </div>
+        <a class="footer-ig-btn" href="https://www.instagram.com/naga.tix?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener"><svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>Hubungi via Instagram</a>
+      </div>
+      <div class="footer-links-col">
+        <h4>DUKUNGAN</h4>
+        <a href="syarat-ketentuan.html">Syarat &amp; Ketentuan</a>
+        <a href="kebijakan-privasi.html">Kebijakan Privasi</a>
+        <a href="bantuan-faq.html">Bantuan / FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-in">
+        <div>&copy; 2026 NAGA.TIX - By PNGBLG. All Rights Reserved. <span id="admin-secret-trigger" style="opacity:0.6; font-size:11px; cursor:pointer; user-select:none;" title="Klik 5x untuk admin">&bull;</span></div>
+        <div class="footer-social">
+          <a class="ig" href="https://www.instagram.com/nagabalangan?utm_source=ig_web_button_share_sheet&obrf=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+          <a class="wa" href="https://wa.me/6282253593653" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- Modal Checkout Formulir -->
+<div class="overlay" id="checkout-modal">
+  <div class="modal">
+    <h3 class="heading-font">Pilih Pembayaran</h3>
+    <p style="font-size: 13.5px; color: var(--text-muted); margin-top: 0; margin-bottom: 20px;">Scan QRIS dan simpan ID Transaksi Anda</p>
+    
+    <div class="checkout-summary">
+      <div class="summary-row">
+        <span>ID Transaksi</span>
+        <span id="trx-id" style="font-family: monospace; font-weight: 600; color: var(--primary-light);">NB-...</span>
+      </div>
+      <div class="summary-row">
+        <span>Jumlah Vote</span>
+        <span id="trx-qty">0 Vote</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total Tagihan</span>
+        <span id="trx-total">Rp 0</span>
+      </div>
+    </div>
+
+    <div class="qr-container">
+      <img src="qris.jpg" alt="QRIS">
+      <div style="font-size: 12px; color: var(--text-muted); margin-top: 10px; font-weight: 500;">Scan QRIS ini untuk membayar</div>
+    </div>
+
+    <p style="font-size: 12px; color: var(--primary-dark); margin-bottom: 15px; font-weight: 500; line-height: 1.4;">Upload bukti transfer di bawah ini. ID Transaksi <strong>(<span id="trx-id-copy"></span>)</strong> sudah terisi otomatis &mdash; tombol konfirmasi aktif setelah bukti berhasil diunggah.</p>
+
+    <!-- FORM UPLOAD BUKTI (Netlify Forms) - pengganti Google Form -->
+    <form id="upload-form" name="upload-bukti" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" enctype="multipart/form-data" class="upload-form">
+      <input type="hidden" name="form-name" value="upload-bukti">
+      <p style="display:none;"><label>Jangan diisi: <input name="bot-field"></label></p>
+
+      <label for="field-nama">Nama Pemilih</label>
+      <input type="text" id="field-nama" name="nama" placeholder="Nama lengkap Anda" required>
+
+      <label for="field-wa">No. WhatsApp <span class="opt">(opsional)</span></label>
+      <input type="tel" id="field-wa" name="whatsapp" placeholder="08xxxxxxxxxx">
+
+      <label for="field-trx-id">ID Transaksi</label>
+      <input type="text" id="field-trx-id" name="id-transaksi" readonly>
+
+      <label for="field-kandidat">Kandidat &amp; Jumlah Vote</label>
+      <input type="text" id="field-kandidat" name="kandidat" readonly>
+      <input type="hidden" id="field-qty" name="jumlah-vote" value="">
+      <input type="hidden" id="field-total" name="total-bayar" value="">
+
+      <label for="bukti-file">Bukti Transfer <span class="opt">(gambar/PDF, maks 8 MB)</span></label>
+      <input type="file" id="bukti-file" name="bukti-transfer" accept="image/*,.pdf" required>
+
+      <button type="submit" id="btn-upload-proof" class="modal-btn-outline">1. Upload Bukti Transfer</button>
+      <div id="upload-status" class="upload-status" role="status"></div>
+    </form>
+
+    <button id="btn-confirm-pay" class="modal-btn" onclick="processPayment()" disabled>2. Konfirmasi Saya Sudah Bayar</button>
+    <button class="modal-btn-cancel" onclick="closeModal('checkout-modal')">Batalkan Transaksi</button>
+  </div>
+</div>
+
+<!-- Modal Admin -->
+<div class="overlay" id="admin-modal">
+  <div class="modal" style="max-width: 440px;">
+    <h3 class="heading-font">Panel Admin</h3>
+    
+    <div id="admin-login-section">
+      <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">Masukkan kata sandi untuk mengedit suara.</p>
+      <input type="password" id="admin-pass" placeholder="Kata sandi admin..." style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 15px; text-align: center;">
+      <button class="modal-btn" onclick="loginAdmin()">Masuk</button>
+      <button class="modal-btn-cancel" onclick="closeModal('admin-modal')">Tutup</button>
+    </div>
+
+    <div id="admin-dashboard-section" style="display: none;">
+      <p style="font-size: 12px; color: var(--primary-light); background: rgba(216,230,250,0.4); padding: 10px; border-radius: 6px; text-align: left; margin-bottom: 15px;">
+        Ubah total suara di bawah jika transfer tidak valid atau penambahan manual.
+      </p>
+      <div id="admin-candidates-list" style="max-height: 350px; overflow-y: auto; margin-bottom: 20px; border-top: 1px solid #eee; padding-right: 8px;"></div>
+      <button class="modal-btn-cancel" onclick="closeModal('admin-modal')">Tutup Panel Admin</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast">
+  <span id="toast-msg">Notifikasi</span>
+</div>
+
+<!-- Skrip Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+  import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC67GsMYbhPw49eAFejm0aQwCTHJOof04c",
+    authDomain: "e-voting-genz.firebaseapp.com",
+    databaseURL: "https://e-voting-genz-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "e-voting-genz",
+    storageBucket: "e-voting-genz.firebasestorage.app",
+    messagingSenderId: "280633986082",
+    appId: "1:280633986082:web:2231e1e4e8b65cf26d0e7b",
+    measurementId: "G-MH1ZFDKFRY"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getDatabase(app);
+  const candidatesRef = ref(db, 'candidates');
+
+  const PRICE_PER_VOTE = 10000;
+  
+  // Urutan tampil resmi (16 Nov 2026): Nanang 65,23,45,17,35,11,63,29,31; Galuh 10,88,30,82,18,64,84,42,02
+  let defaultCandidates = [
+    { id: 1, cat: "nanang", name: "65_Nanang Najib", region: "Kecamatan Paringin Selatan", votes: 0, img: "1.jpg" },
+    { id: 2, cat: "nanang", name: "23_Nanang Rafi", region: "Kecamatan Paringin", votes: 0, img: "2.jpg" },
+    { id: 3, cat: "nanang", name: "45_Nanang Mahdi", region: "Kecamatan Juai", votes: 0, img: "3.jpg" },
+    { id: 4, cat: "nanang", name: "17_Nanang Al", region: "Kecamatan Paringin Selatan", votes: 0, img: "4.jpg" },
+    { id: 5, cat: "nanang", name: "35_Nanang Juna", region: "Kecamatan Paringin", votes: 0, img: "5.jpg" },
+    { id: 6, cat: "nanang", name: "11_Nanang Sulthan", region: "Kecamatan Lampihong", votes: 0, img: "6.jpg" },
+    { id: 7, cat: "nanang", name: "63_Nanang Bayu", region: "Kecamatan Juai", votes: 0, img: "7.jpg" },
+    { id: 8, cat: "nanang", name: "29_Nanang Chandra", region: "Kecamatan Tebing Tinggi", votes: 0, img: "8.jpg" },
+    { id: 9, cat: "nanang", name: "31_Nanang Verzha", region: "Kecamatan Awayan", votes: 0, img: "9.jpg" },
+
+    { id: 11, cat: "galuh", name: "10_Galuh Anis", region: "Kecamatan Tebing Tinggi", votes: 0, img: "01.jpg" },
+    { id: 12, cat: "galuh", name: "88_Galuh Syifa", region: "Kecamatan Paringin", votes: 0, img: "02.jpg" },
+    { id: 13, cat: "galuh", name: "30_Galuh Kurnia", region: "Kecamatan Paringin", votes: 0, img: "03.jpg" },
+    { id: 14, cat: "galuh", name: "82_Galuh Rahma", region: "Kecamatan Paringin", votes: 0, img: "04.jpg" },
+    { id: 15, cat: "galuh", name: "18_Galuh Risnita", region: "Kecamatan Batumandi", votes: 0, img: "05.jpg" },
+    { id: 16, cat: "galuh", name: "64_Galuh Sinta", region: "Kecamatan Halong", votes: 0, img: "06.jpg" },
+    { id: 17, cat: "galuh", name: "84_Galuh Asifa", region: "Kecamatan Juai", votes: 0, img: "07.jpg" },
+    { id: 18, cat: "galuh", name: "42_Galuh Naila", region: "Kecamatan Lampihong", votes: 0, img: "08.jpg" },
+    { id: 19, cat: "galuh", name: "02_Galuh Fitria", region: "Kecamatan Lampihong", votes: 0, img: "09.jpg" }
+  ];
+
+  // Urutan tampil resmi (dipakai grid + sort data): Nanang 65,23,45,17,35,11,63,29,31; Galuh 10,88,30,82,18,64,84,42,02
+  const DISPLAY_ORDER = [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19];
+
+  let candidates = [];
+  let cart = {};
+  let proofUploaded = false; // true setelah bukti berhasil diunggah via Netlify Forms 
+  let activeCategory = "nanang";
+
+  onValue(candidatesRef, (snapshot) => {
+    let data = snapshot.val();
+    document.getElementById("loading-screen").style.display = "none";
+    document.getElementById("main-content").style.display = "block";
+
+    const savedById = new Map(
+      (Array.isArray(data) ? data : [])
+        .filter(Boolean)
+        .map(candidate => [Number(candidate.id), candidate])
+    );
+    candidates = defaultCandidates.map(defaultCandidate => {
+      const savedCandidate = savedById.get(defaultCandidate.id);
+      const savedVotes = Number(savedCandidate?.votes);
+      return {
+        ...defaultCandidate,
+        votes: Number.isFinite(savedVotes) && savedVotes >= 0 ? savedVotes : defaultCandidate.votes,
+        img: getCandidateImage(defaultCandidate)
+      };
+    });
+
+    const dataIsCanonical = Array.isArray(data)
+      && data.length === candidates.length
+      && candidates.every((candidate, index) => {
+        const savedCandidate = data[index];
+        return savedCandidate
+          && Number(savedCandidate.id) === candidate.id
+          && savedCandidate.cat === candidate.cat
+          && savedCandidate.name === candidate.name
+          && savedCandidate.region === candidate.region
+          && savedCandidate.img === candidate.img
+          && Number(savedCandidate.votes) === candidate.votes;
+      });
+    if (!dataIsCanonical) {
+      set(candidatesRef, candidates);
+    }
+    
+    renderApp();
+    if(document.getElementById("admin-dashboard-section") && document.getElementById("admin-dashboard-section").style.display === "block"){
+      renderAdminList();
+    }
+  });
+
+  function formatRp(angka) {
+    return "Rp " + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+  function getCandidateImage(candidate) {
+    if (candidate.cat === "galuh") {
+      return `${String(candidate.id - 10).padStart(2, "0")}.jpg`;
+    }
+    return `${candidate.id}.jpg`;
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    document.getElementById("toast-msg").textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => { toast.classList.remove("show"); }, 4000);
+  }
+
+  window.switchTab = function(category) {
+    activeCategory = category;
+    document.getElementById("tab-nanang").classList.remove("active");
+    document.getElementById("tab-galuh").classList.remove("active");
+    document.getElementById("tab-" + category).classList.add("active");
+    
+    let catName = category === "nanang" ? "Nanang" : "Galuh";
+    document.getElementById("lb-title").textContent = `Leaderboard ${catName}`;
+    document.getElementById("grid-title").textContent = `Kandidat ${catName}`;
+    document.getElementById("podium-cat-title").textContent = catName;
+    
+    renderApp();
+  }
+
+  function renderApp() {
+    let currentCategoryCandidates = candidates.filter(c => c.cat === activeCategory);
+    
+    let sortedCandidates = [...currentCategoryCandidates].sort((a, b) => {
+      if(b.votes !== a.votes) return b.votes - a.votes;
+      return a.id - b.id;
+    });
+    let totalAllVotes = sortedCandidates.reduce((sum, c) => sum + c.votes, 0);
+
+    renderPodium(sortedCandidates.slice(0, 3), totalAllVotes);
+
+    // Leaderboard List (Top 5 for Sidebar)
+    const lbContainer = document.getElementById("leaderboard-container");
+    lbContainer.innerHTML = "";
+    sortedCandidates.slice(0, 5).forEach((c, index) => {
+      let pct = totalAllVotes === 0 ? 0 : ((c.votes / totalAllVotes) * 100).toFixed(1);
+      lbContainer.innerHTML += `
+        <div class="lb-item">
+          <div class="lb-rank">${index + 1}</div>
+          <img src="${c.img}" class="lb-avatar">
+          <div class="lb-details">
+            <div class="lb-name-pct">
+              <span>${c.name}</span>
+              <span style="color:var(--gold-light); font-size: 11px;">${pct}%</span>
+            </div>
+            <div class="lb-bar-track">
+              <div class="lb-bar-fill" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    // Grid Candidates
+    const gridContainer = document.getElementById("candidates-container");
+    gridContainer.innerHTML = "";
+    let gridCandidates = [...currentCategoryCandidates].sort((a, b) => DISPLAY_ORDER.indexOf(a.id) - DISPLAY_ORDER.indexOf(b.id));
+    
+    gridCandidates.forEach((c, idx) => {
+      let displayId = String(idx + 1).padStart(2, '0');
+      gridContainer.innerHTML += `
+        <div class="c-card">
+          <div class="img-wrapper">
+            <div class="badge">${displayId}</div>
+            <img src="${c.img}" alt="${c.name}" loading="lazy">
+          </div>
+          <div class="info">
+            <div>
+              <div class="name">${c.name}</div>
+              <div class="tagline">${c.region}</div>
+            </div>
+            <button class="btn-vote" onclick="window.addToCart(${c.id})">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg>
+              Vote
+            </button>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  function renderPodium(top3, totalVotes) {
+    const wrap = document.getElementById("podium-container");
+    if (!wrap) return;
+
+    if (!top3.length || top3.every(c => !c || c.votes === 0)) {
+      wrap.innerHTML = `<div class="podium-empty">Belum ada suara masuk untuk kategori ini. Jadilah yang pertama memilih!</div>`;
+      return;
+    }
+
+    const visualOrder = [1, 0, 2]; // tampil: #2, #1, #3
+    let html = "";
+
+    visualOrder.forEach((idx) => {
+      const c = top3[idx];
+      if (!c) { html += `<div class="podium-card" style="visibility:hidden;"></div>`; return; }
+
+      const rank = idx + 1;
+      const pct = totalVotes === 0 ? 0 : ((c.votes / totalVotes) * 100).toFixed(1);
+      const sizeClass = rank === 1 ? "podium-first" : (rank === 2 ? "podium-second" : "podium-third");
+
+      html += `
+        <div class="podium-card ${sizeClass}">
+          ${rank === 1 ? '<div class="podium-crown">👑</div>' : ''}
+          <div class="podium-avatar-wrap">
+            <img src="${c.img}" class="podium-avatar" alt="${c.name}">
+            <div class="podium-rank-badge r${rank}">${rank}</div>
+          </div>
+          <div class="podium-name">${c.name}</div>
+          <div class="podium-pct">${pct}%</div>
+          <div class="podium-base b${rank}">${rank}</div>
+        </div>
+      `;
+    });
+
+    wrap.innerHTML = html;
+  }
+
+  window.addToCart = function(id) {
+    // Satu transaksi hanya untuk satu kandidat: pilih kandidat lain = ganti keranjang
+    const existingIds = Object.keys(cart);
+    if (existingIds.length > 0 && !cart[id]) {
+      cart = {};
+      showToast("Satu vote hanya untuk satu kandidat. Pilihan sebelumnya diganti.");
+    }
+    if(!cart[id]) cart[id] = 0;
+    cart[id] += 1;
+    updateSidebar();
+    // Scroll langsung ke tombol "Lanjutkan Pembayaran" setelah vote dipilih
+    const btnCheckout = document.getElementById("btn-checkout");
+    if (btnCheckout) {
+      btnCheckout.scrollIntoView({ behavior: "smooth", block: "center" });
+      btnCheckout.classList.add("btn-checkout-attn");
+      setTimeout(() => btnCheckout.classList.remove("btn-checkout-attn"), 1600);
+    }
+  }
+
+  window.removeFromCart = function(id) {
+    if(cart[id]) delete cart[id];
+    updateSidebar();
+  }
+
+  window.updateCartQty = function(id, newQty) {
+    let parsedQty = parseInt(newQty);
+    if (isNaN(parsedQty) || parsedQty <= 0) {
+      delete cart[id];
+    } else {
+      cart[id] = parsedQty;
+    }
+    updateSidebar();
+  }
+
+  function updateSidebar() {
+    const cartContainer = document.getElementById("cart-items");
+    const totalEl = document.getElementById("cart-total-price");
+    const btnCheckout = document.getElementById("btn-checkout");
+    
+    let totalVotes = 0;
+    cartContainer.innerHTML = "";
+    let hasItems = false;
+    
+    for (const [idStr, qty] of Object.entries(cart)) {
+      if (qty > 0) {
+        hasItems = true;
+        let id = parseInt(idStr);
+        let c = candidates.find(cand => cand.id === id);
+        let subtotal = qty * PRICE_PER_VOTE;
+        totalVotes += qty;
+        
+        cartContainer.innerHTML += `
+          <div class="cart-item">
+            <div style="flex: 1;">
+              <strong style="display:block; margin-bottom:4px; color:var(--primary-dark);">${c.name}</strong>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <input type="number" min="1" value="${qty}" class="qty-input" onchange="window.updateCartQty(${c.id}, this.value)">
+                <span style="color:var(--text-muted); font-size: 11px;">x Rp 10.000</span>
+              </div>
+            </div>
+            <div style="text-align:right; display:flex; flex-direction:column; justify-content:space-between;">
+              <div style="font-weight:600; color:var(--primary-dark);">${formatRp(subtotal)}</div>
+              <button onclick="window.removeFromCart(${c.id})" style="background:none; border:none; color:#c0392b; cursor:pointer; font-size:11px; text-decoration:underline; padding:0; text-align:right;">Hapus</button>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    if (!hasItems) {
+      cartContainer.innerHTML = `<div style="font-size: 13px; color: var(--text-muted); text-align: center; margin: 10px 0;">Belum ada vote yang dipilih</div>`;
+    }
+
+    let grandTotal = totalVotes * PRICE_PER_VOTE;
+    totalEl.textContent = formatRp(grandTotal);
+    btnCheckout.disabled = !hasItems;
+  }
+
+  window.openCheckout = function() {
+    let totalVotes = Object.values(cart).reduce((a, b) => a + b, 0);
+    let totalPrice = totalVotes * PRICE_PER_VOTE;
+    
+    let firstIdStr = Object.keys(cart)[0];
+    let firstCand = candidates.find(c => c.id == firstIdStr);
+    
+    let prefix = "NB";
+    let candDisplayId = "0";
+
+    if (firstCand) {
+      prefix = firstCand.cat === "galuh" ? "GB" : "NB";
+      candDisplayId = firstCand.id > 9 ? firstCand.id - 9 : firstCand.id;
+    }
+    
+    let randomCode = Math.floor(10 + Math.random() * 90);
+    let newTrxId = `${prefix}-${candDisplayId}-${totalVotes}-${randomCode}`;
+    
+    document.getElementById("trx-id").textContent = newTrxId;
+    document.getElementById("trx-id-copy").textContent = newTrxId;
+    document.getElementById("trx-qty").textContent = totalVotes + " Vote";
+    document.getElementById("trx-total").textContent = formatRp(totalPrice);
+
+    // Isi otomatis form upload bukti + reset status upload (ID transaksi baru)
+    const uploadForm = document.getElementById("upload-form");
+    if (uploadForm) uploadForm.reset();
+    const cartSummary = Object.entries(cart).map(([idStr, qty]) => {
+      const c = candidates.find(cand => cand.id == idStr);
+      return c ? `${c.name} x${qty}` : "";
+    }).filter(Boolean).join(", ");
+    document.getElementById("field-trx-id").value = newTrxId;
+    document.getElementById("field-kandidat").value = cartSummary;
+    document.getElementById("field-qty").value = totalVotes + " Vote";
+    document.getElementById("field-total").value = formatRp(totalPrice);
+    proofUploaded = false;
+    const uploadStatus = document.getElementById("upload-status");
+    if (uploadStatus) uploadStatus.textContent = "";
+    const uploadBtn = document.getElementById("btn-upload-proof");
+    if (uploadBtn) { uploadBtn.disabled = false; uploadBtn.textContent = "1. Upload Bukti Transfer"; }
+    const confirmBtn = document.getElementById("btn-confirm-pay");
+    if (confirmBtn) confirmBtn.disabled = true;
+
+    document.getElementById("checkout-modal").style.display = "flex";
+  }
+
+  window.closeModal = function(modalId) {
+    document.getElementById(modalId).style.display = "none";
+  }
+
+  window.processPayment = function() {
+    if (!proofUploaded) {
+      showToast("Upload bukti transfer dulu sebelum konfirmasi.");
+      return;
+    }
+    let totalVotesAdded = 0;
+    for (const [idStr, qty] of Object.entries(cart)) {
+      let id = parseInt(idStr);
+      let candIndex = candidates.findIndex(c => c.id === id);
+      if(candIndex !== -1) {
+        candidates[candIndex].votes += qty;
+        totalVotesAdded += qty;
+      }
+    }
+    
+    set(candidatesRef, candidates);
+    cart = {};
+    updateSidebar();
+    closeModal('checkout-modal');
+    showToast(`✅ Berhasil! ${totalVotesAdded} vote langsung ditambahkan ke server pusat.`);
+  }
+
+  // Upload bukti via Netlify Forms (pengganti Google Form).
+  // Netlify menerima POST multipart ke "/" dan menyimpan submission + file
+  // di dashboard Netlify (Forms). Tanpa login Google.
+  const uploadFormEl = document.getElementById("upload-form");
+  if (uploadFormEl) {
+    uploadFormEl.addEventListener("submit", async function(event) {
+      event.preventDefault();
+      const statusEl = document.getElementById("upload-status");
+      const submitBtn = document.getElementById("btn-upload-proof");
+      const fileInput = document.getElementById("bukti-file");
+      const file = fileInput.files[0];
+      if (!file) {
+        statusEl.textContent = "Pilih dulu file bukti transfernya.";
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        statusEl.textContent = "Ukuran file maksimal 8 MB. Perkecil dulu gambarnya lalu coba lagi.";
+        return;
+      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Mengunggah...";
+      statusEl.textContent = "Mengunggah bukti, mohon tunggu...";
+      try {
+        const formData = new FormData(uploadFormEl);
+        const res = await fetch("/", { method: "POST", body: formData });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        proofUploaded = true;
+        statusEl.textContent = "✅ Bukti berhasil diunggah. Silakan lanjut ke langkah 2.";
+        submitBtn.textContent = "✓ Bukti Terunggah";
+        document.getElementById("btn-confirm-pay").disabled = false;
+      } catch (err) {
+        statusEl.textContent = "❌ Gagal mengunggah. Periksa koneksi lalu coba lagi.";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "1. Upload Bukti Transfer";
+      }
+    });
+  }
+
+  // Admin Scripts
+  const adminSecretTrigger = document.getElementById("admin-secret-trigger");
+  let secretTapCount = 0;
+
+  document.addEventListener("keydown", function(event) {
+    const isAdminShortcut = event.ctrlKey && event.altKey && event.key.toLowerCase() === "a";
+    if (isAdminShortcut) {
+      window.openAdmin();
+    }
+  });
+
+  if (adminSecretTrigger) {
+    adminSecretTrigger.addEventListener("click", function() {
+      secretTapCount += 1;
+      if (secretTapCount >= 5) {
+        window.openAdmin();
+        secretTapCount = 0;
+      }
+    });
+  }
+
+  window.openAdmin = function() {
+    document.getElementById("admin-pass").value = "";
+    document.getElementById("admin-login-section").style.display = "block";
+    document.getElementById("admin-dashboard-section").style.display = "none";
+    document.getElementById("admin-modal").style.display = "flex";
+  }
+
+  window.loginAdmin = function() {
+    const pass = document.getElementById("admin-pass").value;
+    if (pass === "king") {
+      document.getElementById("admin-login-section").style.display = "none";
+      document.getElementById("admin-dashboard-section").style.display = "block";
+      renderAdminList();
+    } else {
+      alert("Kata sandi salah!");
+    }
+  }
+
+  function renderAdminList() {
+    const listContainer = document.getElementById("admin-candidates-list");
+    listContainer.innerHTML = "";
+    let sortedForAdmin = [...candidates].sort((a,b) => a.id - b.id);
+    
+    sortedForAdmin.forEach(c => {
+      let badgeColor = c.cat === 'nanang' ? 'var(--primary-dark)' : 'var(--gold)';
+      listContainer.innerHTML += `
+        <div class="admin-input-group">
+          <label>
+            <span style="font-size:10px; background:${badgeColor}; color:white; padding:2px 6px; border-radius:4px; text-transform:uppercase;">${c.cat}</span>
+            ${c.name}
+          </label>
+          <div style="display:flex; align-items:center;">
+            <input type="number" id="admin-input-${c.id}" value="${c.votes}">
+            <button class="admin-save-btn" onclick="window.saveAdminVote(${c.id})">Simpan</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  window.saveAdminVote = function(id) {
+    const inputVal = document.getElementById(`admin-input-${id}`).value;
+    let newVotes = parseInt(inputVal);
+    if (isNaN(newVotes) || newVotes < 0) newVotes = 0;
+
+    let candIndex = candidates.findIndex(c => c.id === id);
+    if(candIndex !== -1) {
+      candidates[candIndex].votes = newVotes;
+    }
+    
+    set(candidatesRef, candidates);
+    showToast(`Suara Admin untuk ${candidates[candIndex].name} disinkronisasi ke server!`);
+  }
+</script>
+</body>
+</html>
